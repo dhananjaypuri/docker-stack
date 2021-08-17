@@ -1,0 +1,21 @@
+################### Nginx Stack ############################################
+############# Please create custom N/W (overlay outside compose file as its not working inside this)
+version: "3.5"
+services:
+  web_ng:
+    image: nginx
+    deploy:
+      replicas: 5
+      mode: replicated
+    ports:
+      - "8000:80"
+    networks: 
+      - mynet1
+    volumes:
+      - myvol:/usr/share/nginx/html/
+networks: 
+  mynet1:
+    external: true
+volumes:
+  myvol:
+    external: true
